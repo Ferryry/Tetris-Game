@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.Random;
 
 public class Tetris {
 
@@ -96,15 +97,51 @@ public class Tetris {
   }
 
   /**
-   * Setup and starting method for the game
+   * Setup and starting method for the game.
    */
   private void start() {
 
     board = new Board(6, 10);
+    block = generateNewBlock();
 
     isRunning = true;
 
     updateGameOutputRender(isRunning);
+  }
+
+  /**
+   * Generates a new random block.
+   */
+  private Block generateNewBlock() {
+    Block tetrisBlock = new Block();
+
+    BlockGenerator<Block> blockGenerator = () -> {
+      int random = new Random().nextInt(2);
+      switch (random) {
+        case 0:
+          String[][] quadrat = new String[2][2];
+          quadrat[0][0] = "X";
+          quadrat[0][1] = "X";
+          quadrat[1][0] = "X";
+          quadrat[1][1] = "X";
+          tetrisBlock.block = quadrat;
+      
+        default:
+          String[][] rectangle = new String[2][4];
+          rectangle[0][0] = "X";
+          rectangle[0][1] = "X";
+          rectangle[0][2] = "X";
+          rectangle[0][3] = "X";
+          rectangle[1][0] = "X";
+          rectangle[1][1] = "X";
+          rectangle[1][2] = "X";
+          rectangle[1][3] = "X";
+          tetrisBlock.block = rectangle;
+      }
+      return tetrisBlock;
+    };
+
+    return blockGenerator.GenerateBlock();
   }
 
   /**
