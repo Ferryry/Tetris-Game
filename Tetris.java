@@ -6,13 +6,19 @@ public class Tetris {
   private Board board;
   private Block block;
 
-  private class ANSIIColor {
+  /**
+   * ANSI color table for the game.
+   */
+  private class ANSIColor {
     public static final String RED = "\u001B[31m";
     public static final String BLUE = "\u001B[34m";
     public static final String GREEN = "\u001B[32m";
     public static final String BLACK = "\u001B[30m";
   }
 
+  /**
+   * The game's board.
+   */
   private class Board implements Cloneable {
     private String[][] board;
 
@@ -21,7 +27,7 @@ public class Tetris {
 
       for (int i = 0; i < board.length; i++) {
         for (int j = 0; j < board[i].length; j++) {
-          board[i][j] = String.format("%1$s X %1$s", ANSIIColor.BLACK);
+          board[i][j] = String.format("%1$s X %1$s", ANSIColor.BLACK);
         }
       }
     }
@@ -35,21 +41,36 @@ public class Tetris {
     }
   }
 
+  /**
+   * Tetris block class that contains color, block color, block shape, realized as a linked-list.
+   */
   private class Block implements Iterable<Block>, Cloneable {
 
-    private ANSIIColor color;
+    private ANSIColor color;
     private String[][] block;
     private String name;
     private Block next;
 
+    /**
+     * Gets the block's shape.
+     * @return The block's shape as an array.
+     */
     public String[][] getBlock() {
       return block;
     }
 
+    /**
+     * Gets the block's internal name.
+     * @return The name.
+     */
     public String getName() {
       return name;
     }
 
+    /**
+     * Gets the next block.
+     * @return Next block.
+     */
     public Block getNextBlock() {
       return next;
     }
@@ -74,7 +95,10 @@ public class Tetris {
     }
   }
 
-  public void start() {
+  /**
+   * Setup and starting method for the game
+   */
+  private void start() {
 
     board = new Board(6, 10);
 
@@ -83,14 +107,25 @@ public class Tetris {
     updateGameOutputRender(isRunning);
   }
 
+  /**
+   * Here's the game logic such as game input, behaviour and board check ups.
+   */
   public void update() {
 
   }
 
+  /**
+   * Returns the current state of the game.
+   * @return The state as boolean.
+   */
   public boolean isRunning() {
     return isRunning;
   }
 
+  /**
+   * Renders the entire game in the current state.
+   * @param boardOnly If true only the board is being displayed, otherwise other information will be displayed too.
+   */
   private void updateGameOutputRender(boolean boardOnly) {
 
     System.out.flush();
@@ -108,6 +143,9 @@ public class Tetris {
 
   }
 
+  /**
+   * Main game loop.
+   */
   public void run() {
 
     start();
