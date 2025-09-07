@@ -2,8 +2,6 @@ import java.util.Iterator;
 
 public class Tetris {
 
-  private String title;
-  private int width, height;
   private boolean isRunning;
   private Board board;
   private Block block;
@@ -91,20 +89,6 @@ public class Tetris {
 
   public boolean isRunning() {
     return isRunning;
-  }
-
-  public Tetris(String title, int width, int height) {
-    this.setWindow(width, height);
-    this.setTitle(title);
-  }
-  
-  public void setWindow(int width, int height) {
-    this.width = width > 0 ? width : 640;
-    this.height = height > 0 ? height : 480;
-  }
-  
-  public void setTitle(String title) {
-    this.title = title.length() > 0 ? title : "Tetris";
   }
 
   private void updateGameOutputRender(boolean boardOnly) {
